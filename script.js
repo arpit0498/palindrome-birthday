@@ -38,6 +38,7 @@ function convertDateToString(date)
 
 function getAllDateFormats(date){
     var dateStr= convertDateToString(date);
+
     var ddmmyyyy=dateStr.day + dateStr.month + dateStr.year;
     var mmddyyyy= dateStr.month + dateStr.day+ dateStr.year;
     var yyyymmdd=dateStr.year+ dateStr.month+dateStr.day;
@@ -47,10 +48,27 @@ function getAllDateFormats(date){
 
     return [ddmmyyyy,mmddyyyy,mmddyyyy,yyyymmdd,mmddyy,yymmdd];
 }
+
+ function checkPalindrome(){
+     var listOfPalindromes = getAllDateFormats(date);
+     var flag = false;
+
+     for (var i=0; i< listOfPalindromes.length ;i++)
+     {
+         if(isPalindrome(listOfPalindromes[i])){
+             flag =true;
+             break;
+         }
+     }
+
+     return flag;
+
+ }
+
 var date={
-    day:5,
+    day:2,
     month:11,
     year:2020
 };
 
-console.log(getAllDateFormats(date));
+console.log(checkPalindrome(date));
