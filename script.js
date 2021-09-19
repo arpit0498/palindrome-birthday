@@ -63,7 +63,7 @@ function getAllDateFormats(date){
      return flag;
 
 }
-
+//check for leap year
 function isLeapYear(year){
     if(year % 400 ===0){
         return true;
@@ -77,6 +77,7 @@ function isLeapYear(year){
     return false;
 }
 
+//get nxt date (29feb -> 1 march; 12 jan to 13 jan)
 function getNextDate(date)
 {
     var day = date.day +1; //increment the day
@@ -84,9 +85,9 @@ function getNextDate(date)
     var year = date.year;
 
     var daysInMonth =[31,28,31,30,31,30,31,31,30,31,30,31];// Different days in month
-
+//check for february
     if(month === 2)
-    {   //check for february
+    {   //check for leap year
         if(isLeapYear){
                 if(day>29){
                     day =1;
@@ -95,23 +96,27 @@ function getNextDate(date)
         }else{
                 if(day>29){
                     day=1;
-                    month++;
+                    month++;// increment month
                 }
         }
     }
+    //check for other months
     else
-    {   //check if the day exceeds the mex days in month
-         if(day>daysInMonth[month-1]){
+    {   //check if the day exceeds the max days in month
+         if(day>daysInMonth[month-1])
+         {
              day=1;
              month++;
          }
     }
+    //increment year if month > 12
             if (month>12)
             {
                 month=1;
                 year++;
             }
     return {
+        //return object
         day:day,
         month:month,
         year:year,
