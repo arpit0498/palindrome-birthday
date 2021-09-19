@@ -48,7 +48,7 @@ function getAllDateFormats(date){
     return [ddmmyyyy,mmddyyyy,mmddyyyy,yyyymmdd,mmddyy,yymmdd];
 }
 
- function checkPalindrome(){
+ function checkPalindrome(date){
      var listOfPalindromes = getAllDateFormats(date);
      var flag = false;
 
@@ -138,3 +138,37 @@ function getNextPalindromeDate(date){
 
     return [ctr, nextDate]
 }
+
+var dateRef= document.querySelector('#bday-input');
+var showbtn =document.querySelector('#show-btn');
+var resultref = document.querySelector('#result');
+
+function clickHandler(e){
+    var bdayStr = dateRef.value;
+    if(bdayStr !== '')
+    {
+        var listofDate = bdayStr.split('-');
+
+        var date= {
+            day:Number(listofDate[2]),
+            month:Number( listofDate[1]),
+            year:Number(listofDate[0])
+        };
+
+    var isPalindrome= checkPalindrome(date);
+        if(isPalindrome){
+                resultref.innerText="ur bday is palindrome"
+        }else{
+            var [ctr, nextDate]=getNextPalindromeDate(date);
+            resultref.innerText='the next palindrome is ${nextDate.day}-${nextDate.month}-${nextDate.year} you missed by${ctr}days'
+        }
+
+    
+
+    }
+
+}
+
+showbtn.addEventListener('click', clickHandler);
+
+
