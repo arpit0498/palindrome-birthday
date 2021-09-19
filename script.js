@@ -103,7 +103,7 @@ function getNextDate(date)
     //check for other months
     else
     {   //check if the day exceeds the max days in month
-         if(day>daysInMonth[month-1])
+         if(day>daysInMonth[month-1])// get month index
          {
              day=1;
              month++;
@@ -138,11 +138,3 @@ function getNextPalindromeDate(date){
 
     return [ctr, nextDate]
 }
-
-var date={
-    day:21,
-    month:2,
-    year:2020
-};
-
-console.log(getNextPalindromeDate(date));
