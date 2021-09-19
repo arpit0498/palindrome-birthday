@@ -62,9 +62,7 @@ function getAllDateFormats(date){
 
      return flag;
 
- }
-
-
+}
 
 function isLeapYear(year){
     if(year % 400 ===0){
@@ -81,14 +79,14 @@ function isLeapYear(year){
 
 function getNextDate(date)
 {
-    var day = date.day +1;
+    var day = date.day +1; //increment the day
     var month = date.month;
     var year = date.year;
 
-    var daysInMonth =[31,28,31,30,31,30,31,31,30,31,30,31];
+    var daysInMonth =[31,28,31,30,31,30,31,31,30,31,30,31];// Different days in month
 
     if(month === 2)
-    {
+    {   //check for february
         if(isLeapYear){
                 if(day>29){
                     day =1;
@@ -102,7 +100,7 @@ function getNextDate(date)
         }
     }
     else
-    {
+    {   //check if the day exceeds the mex days in month
          if(day>daysInMonth[month-1]){
              day=1;
              month++;
@@ -121,10 +119,25 @@ function getNextDate(date)
     };
 }
 
+function getNextPalindromeDate(date){
+    var ctr =0;
+    var nextDate= getNextDate(date);
+    while(1){
+        ctr++;
+        var isPalindrome = checkPalindrome(nextDate);
+        if(isPalindrome){
+            break;
+        }
+        nextDate= getNextDate(nextDate);
+    }
+
+    return [ctr, nextDate]
+}
+
 var date={
-    day:29,
+    day:21,
     month:2,
     year:2020
 };
 
-console.log(getNextDate(date));
+console.log(getNextPalindromeDate(date));
