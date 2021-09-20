@@ -1,0 +1,26 @@
+body {
+  margin: 0;
+  padding: 1rem;
+  box-sizing: border-box;
+  height: 100vh;
+  background-color: rgb(18, 34, 77);
+  color: white;
+}
+
+main {
+  border: 1px solid rgb(24, 21, 21);
+  text-align: center;
+  height: 100%;
+  padding: auto;
+}
+
+h1{
+    color: goldenrod;
+}
+
+p {
+    color: goldenrod;
+  padding: 1rem;
+  text-align: left;
+  font-size: larger;
+}

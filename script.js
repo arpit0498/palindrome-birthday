@@ -145,93 +145,29 @@ function getNextPalindromeDate(date){
 
     return [ctr, nextDate]
 }
-
-function getPreDate(date) {
-  var day = date.day - 1;
-  var month = date.month;
-  var year = date.year;
-
-  var daysInMonth = [31, 28, 31, 30, 31, 30, 31, 31, 30, 31, 30, 31];
-
-  if (day === 0) {
-    month--;
-
-    if (month === 0) {
-      month = 12;
-      day = 31;
-      year--;
-    }
-    else if (month === 2) {
-      if (isLeapYear(year)) {
-        day = 29;
-      }
-      else {
-        day = 28;
-      }
-    }
-    else {
-      day = daysInMonth[month - 1];
-    }
-  }
-
-  return {
-    day: day,
-    month: month,
-    year: year
-  }
-}
-function getPrePalindromeDate(date) {
-
-  var previousDate = getPreDate(date);
-  var ctr = 0;
-
-  while (1) {
-    ctr++;
-    var dateStr = convertDateToString(previousDate);
-    var resultList = checkPalindrome(dateStr);
-
-    for (let i = 0; i < resultList.length; i++) {
-      if (resultList[i]) {
-        return [ctr, previousDate];
-      }
-    }
-    previousDate = getPreDate(previousDate);
-  }
-}
-
-function clickHandler(e)
-{
+function clickHandler(e){
     var bdayStr = dateRef.value;
     if(bdayStr !== '')
     {
         var listofDate = bdayStr.split('-');
 
-        var date= 
-                {
-                    day:Number(listofDate[2]),
-                    month:Number( listofDate[1]),
-                    year:Number(listofDate[0])
-                };
+        var date= {
+            day:Number(listofDate[2]),
+            month:Number( listofDate[1]),
+            year:Number(listofDate[0])
+        };
 
-        var isPalindrome= checkPalindrome(date);
-        if(isPalindrome)
-                {
-                  resultref.innerText="ur bday is palindrome";
-                }
-        else
-        {
-              const [ctr1, nextDate] = getNextPalindromeDate(date);
-              const [ctr2, prevDate] = getPrePalindromeDate(date);
+    var isPalindrome= checkPalindrome(date);
+        if(isPalindrome){
+                resultref.innerText="yippie ! Your birthday is palindrome"
+        }else{
+            var [ctr, nextDate]=getNextPalindromeDate(date);
+          
+            resultref.innerText=`The next palindrome is ${nextDate.day}-${nextDate.month}-${nextDate.year} you missed by  ${ctr}  days`;
+        }
 
-                if (ctr1 > ctr2)
-                    {
-                     resultref.innerText = `The nearest palindrome date is ${prevDate.day}-${prevDate.month}-${prevDate.year}, you missed by ${ctr2} days.`;
-                    }
-                else
-                {
-                 resultref.innerText = `The nearest palindrome date is ${nextDate.day}-${nextDate.month}-${nextDate.year}, you missed by ${ctr1} days.`;
-                }
-            
-         }
+
+
     }
+
 }
